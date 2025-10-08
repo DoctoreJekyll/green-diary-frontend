@@ -1,8 +1,17 @@
-import { BootstrapContext, bootstrapApplication } from '@angular/platform-browser';
+import { bootstrapApplication } from '@angular/platform-browser';
 import { App } from './app/app';
-import { config } from './app/app.config.server';
+import { provideServerRendering } from '@angular/platform-server';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideRouter } from '@angular/router';
+import { routes } from './app/app.routes';
+import { authInterceptor } from './app/auth/auth.interceptor';
 
-const bootstrap = (context: BootstrapContext) =>
-    bootstrapApplication(App, config, context);
+const bootstrap = () => bootstrapApplication(App, {
+  providers: [
+    provideServerRendering(),
+    provideHttpClient(withInterceptors([authInterceptor])),
+    provideRouter(routes)
+  ]
+});
 
 export default bootstrap;

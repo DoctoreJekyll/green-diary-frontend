@@ -1,0 +1,16 @@
+<nav class="flex items-center justify-between p-4 bg-white shadow">
+  <div class="flex items-center gap-4">
+    <a routerLink="/" class="text-xl font-semibold text-green-600">🌱 Green Diary</a>
+    <a routerLink="/plants" class="text-sm text-gray-700 hover:underline">Plantas</a>
+  </div>
+
+  <div>
+    <ng-container *ngIf="auth.user$ | async as user; else guest">
+      <span class="text-sm mr-4">Hola, {{ user.username || user.sub || 'Usuario' }}</span>
+      <button (click)="logout()" class="px-3 py-1 rounded bg-red-500 text-white">Logout</button>
+    </ng-container>
+    <ng-template #guest>
+      <a routerLink="/login" class="px-3 py-1 rounded bg-green-600 text-white">Login</a>
+    </ng-template>
+  </div>
+</nav>

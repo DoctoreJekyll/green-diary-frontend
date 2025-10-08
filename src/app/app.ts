@@ -1,12 +1,17 @@
-import { Component, signal } from '@angular/core';
+// src/app/app.ts
+import { Component } from '@angular/core';
+import { NavbarComponent } from './navbar/navbar.component';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.scss'
+  template: `
+    <app-navbar></app-navbar>
+    <main class="p-6">
+      <router-outlet></router-outlet>
+    </main>
+  `,
+  standalone: true,
+  imports: [NavbarComponent, RouterOutlet]
 })
-export class App {
-  protected readonly title = signal('green-diary-frontend');
-}
+export class App {}

@@ -1,0 +1,37 @@
+<div
+  class="bg-white rounded-2xl shadow-md p-5 hover:shadow-lg transition-shadow duration-300 ease-in-out flex flex-col justify-between h-full"
+>
+  <!-- Nombre -->
+  <h2
+    class="text-xl font-bold text-green-700 mb-3 break-words truncate"
+    title="{{ plant.name }}"
+  >
+    {{ plant.name }}
+  </h2>
+
+  <!-- Info de la planta -->
+  <div class="space-y-2 text-gray-600 text-sm">
+    <p *ngIf="plant.species" class="flex items-center gap-2 flex-wrap break-words">
+      🌱 <span class="font-medium">Especie:</span> {{ plant.species }}
+    </p>
+    <p *ngIf="plant.location" class="flex items-center gap-2 flex-wrap break-words">
+      📍 <span class="font-medium">Ubicación:</span> {{ plant.location }}
+    </p>
+    <p *ngIf="plant.notes" class="flex items-center gap-2 flex-wrap break-words">
+      📝 <span class="font-medium">Notas:</span> {{ plant.notes }}
+    </p>
+    <p class="flex items-center gap-2 flex-wrap">
+      💧 <span class="font-medium">Último riego:</span>
+      <span *ngIf="plant.lastWatered; else noWatering">{{ plant.lastWatered | date:'short' }}</span>
+      <ng-template #noWatering>Nunca regada</ng-template>
+    </p>
+  </div>
+
+  <!-- Botón -->
+  <button
+    (click)="waterPlant()"
+    class="mt-4 bg-green-600 text-white py-2 px-4 rounded-lg shadow hover:bg-green-700 active:scale-95 transition-all duration-150"
+  >
+    Regar ahora 💦
+  </button>
+</div>
